@@ -90,7 +90,7 @@ describe('react-draggable', function () {
           <div
             className="react-draggable"
             style={{
-              [transformKey]: 'translate(0px, 0px)'
+              [transformKey]: 'translate(0px, 0px) rotate(0deg)'
             }}
             transform={null} />
         </DraggableCore>
@@ -177,7 +177,7 @@ describe('react-draggable', function () {
     });
 
     it('should throw when setting transform', function () {
-      drag = (<Draggable transform="translate(100, 100)"><span /></Draggable>);
+      drag = (<Draggable transform="translate(100, 100) rotate(0deg)"><span /></Draggable>);
 
       TestUtils.renderIntoDocument(drag);
 
@@ -254,7 +254,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(100px, 100px);') >= 0);
+      assert(style.indexOf('transform: translate(100px, 100px) rotate(0deg);') >= 0);
     });
 
     it('should honor "x" axis', function () {
@@ -270,7 +270,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(100px, 0px);') >= 0);
+      assert(style.indexOf('transform: translate(100px, 0px) rotate(0deg);') >= 0);
     });
 
     it('should honor "y" axis', function () {
@@ -286,7 +286,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(0px, 100px);') >= 0);
+      assert(style.indexOf('transform: translate(0px, 100px) rotate(0deg);') >= 0);
     });
 
     it('should honor "none" axis', function () {
@@ -302,7 +302,7 @@ describe('react-draggable', function () {
 
       const style = node.getAttribute('style');
       assert(dragged === true);
-      assert(style.indexOf('transform: translate(0px, 0px);') >= 0);
+      assert(style.indexOf('transform: translate(0px, 0px) rotate(0deg);') >= 0);
     });
 
     it('should detect if an element is instanceof SVGElement and set state.isElementSVG to true', function() {
@@ -336,7 +336,8 @@ describe('react-draggable', function () {
       simulateMovementFromTo(drag, 0, 0, 100, 100);
 
       const transform = node.getAttribute('transform');
-      assert(transform.indexOf('translate(100,100)') >= 0);
+      assert(transform);
+      assert(transform.indexOf('translate(100, 100) rotate(0)') >= 0);
     });
 
       it('should add and remove transparent selection class', function () {
@@ -410,7 +411,7 @@ describe('react-draggable', function () {
 
         const style = node.getAttribute('style');
         assert(dragged === true);
-        assert(style.indexOf('transform: translate(100px, 100px);') >= 0);
+        assert(style.indexOf('transform: translate(100px, 100px) rotate(0deg);') >= 0);
 
         renderRoot.parentNode.removeChild(renderRoot);
         done();
